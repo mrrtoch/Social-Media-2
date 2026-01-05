@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Toch - Full Animated Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* ភ្ជាប់ Font Kh Ang Penh ប្រសិនបើអ្នកមាន File នៅក្នុង Folder */
+        @font-face {
+            font-family: 'KhFont';
+            src: url('kh.ttf') format('truetype');
+        }
+
+        body { 
+            margin: 0; 
+            background: #fff0f5; 
+            font-family: 'KhFont', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow: hidden; 
+        }
+
+        /* បេះដូងហោះ */
+        .heart { position: absolute; color: #ff80ab; font-size: 20px; animation: floatHeart 4s linear forwards; z-index: 1; }
+        @keyframes floatHeart { 0% { transform: translateY(100vh); opacity: 1; } 100% { transform: translateY(-10vh); opacity: 0; } }
+
+        /* ចលនាព្រួញលោត */
+        @keyframes bounceArrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        /* ចលនារូបថតអណ្តែតចុះឡើង */
+        @keyframes floatImg { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* ចលនា Logo លោត */
+        @keyframes bounceLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .card { 
+            background: white; 
+            width: 320px; 
+            padding: 30px 20px; 
+            border-radius: 50px; 
+            text-align: center; 
+            box-shadow: 0 15px 35px rgba(255, 128, 171, 0.2); 
+            position: relative; 
+            z-index: 10;
+            margin-top: 50px;
+        }
+
+        .music-section {
+            position: relative;
+            margin-top: -70px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .guide-box { 
+            margin-bottom: 8px;
+            animation: bounceArrow 1s infinite; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .guide-text { 
+            background: #ff80ab; 
+            color: white; 
+            padding: 6px 15px; 
+            border-radius: 15px; 
+            font-size: 13px; 
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.3);
+        }
+
+        #musicBtn { 
+            background: #ff80ab; 
+            color: white; 
+            border: 6px solid white; 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 50%; 
+            font-size: 26px; 
+            cursor: pointer; 
+            box-shadow: 0 5px 15px rgba(255,128,171,0.4); 
+            z-index: 11;
+            transition: 0.3s;
+        }
+
+        .img-container { 
+            width: 160px; 
+            height: 160px; 
+            margin: 10px auto 15px; 
+            border-radius: 50%; 
+            border: 6px solid #ffc1e3; 
+            overflow: hidden; 
+            position: relative;
+            animation: floatImg 3s ease-in-out infinite;
+        }
+
+        .slide { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: 1.5s; }
+        .active { opacity: 1; }
+
+        h1 { color: #ff80ab; margin: 5px 0; font-size: 30px; }
+        
+        /* អត្ថបទដែលបាត់ */
+        .welcome-text {
+            color: #777;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .socials { display: flex; justify-content: center; gap: 15px; }
+
+        .socials a { 
+            text-decoration: none; 
+            color: white; 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 22px;
+            animation: bounceLogo 2s ease-in-out infinite;
+        }
+
+        .fb { background: #1877f2; animation-delay: 0s; }
+        .tg { background: #0088cc; animation-delay: 0.2s; }
+        .tk { background: #000; animation-delay: 0.4s; }
+
+        #player { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="player"></div>
+
+    <div class="card">
+        <div class="music-section">
+            <div class="guide-box" id="guide">
+                <span class="guide-text">ចុចទីនេះស្តាប់ចម្រៀង 🎵</span>
+                <i class="fas fa-chevron-down" style="color: #ff80ab; margin-top: 3px;"></i>
+            </div>
+            <button id="musicBtn" onclick="togglePlay()">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+
+        <div class="img-container">
+            <img src="a1.jpg" class="slide active">
+            <img src="a2.jpg" class="slide">
+            <img src="a3.jpg" class="slide">
+            <img src="a4.jpg" class="slide">
+            <img src="a5.jpg" class="slide">
+        </div>
+
+        <h1>Mr Toch</h1>
+        
+        <p class="welcome-text">សូមស្វាគមន៍មកកាន់គេហទំព័ររបស់ខ្ញុំ! ✨</p>
+        
+        <div class="socials">
+            <a href="https://www.facebook.com/toch.fb" target="_blank" class="fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://t.me/mrr_toch" target="_blank" class="tg"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://www.tiktok.com/@toch.fb2" target="_blank" class="tk"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+
+    <script>
+        // ១. Slide រូបភាព ៥ វិនាទីម្តង
+        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000);
+
+        // ២. YouTube API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+
+        var ytPlayer, heartInterval;
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('player', { height: '0', width: '0', videoId: '-__W6u7gjGg' });
+        }
+
+        function togglePlay() {
+            const btn = document.getElementById('musicBtn');
+            const guide = document.getElementById('guide');
+            if (ytPlayer.getPlayerState() == 1) {
+                ytPlayer.pauseVideo();
+                btn.innerHTML = '<i class="fas fa-play"></i>';
+                btn.style.background = "#ff80ab";
+                clearInterval(heartInterval);
+            } else {
+                ytPlayer.playVideo();
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                btn.style.background = "#98e5a7";
+                guide.style.visibility = 'hidden';
+                heartInterval = setInterval(() => {
+                    const h = document.createElement('div');
+                    h.innerHTML = '❤️'; h.className = 'heart';
+                    h.style.left = Math.random() * 100 + 'vw';
+                    document.body.appendChild(h);
+                    setTimeout(() => h.remove(), 4000);
+                }, 400);
+            }
+        }
+    </script>
+</body>
+</html>
